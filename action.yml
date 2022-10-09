@@ -1,6 +1,6 @@
-name: "GitHub Tag"
+name: "GitHub Tag - Force Bump Fork"
 description: "Bump and push git tag on merge"
-author: "Mathieu Dutour"
+author: "Romain Endelin"
 outputs:
   new_tag:
     description: "Generated tag"
