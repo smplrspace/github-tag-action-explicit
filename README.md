@@ -1,3 +1,6 @@
+> [!NOTE]  
+> This is a fork from [mathieudutour/github-tag-action](https://github.com/mathieudutour/github-tag-action) adding options for explicit version bumps: `force_bump` and `force_prerelease_bump`. The motivation is described in https://github.com/mathieudutour/github-tag-action/pull/169. Please 👍 the PR if you're using this.
+
 # GitHub Tag Action
 
 A GitHub Action to automatically bump and tag master, on merge, with the latest SemVer formatted version. Works on any platform.
@@ -17,7 +20,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
         id: tag_version
-        uses: mathieudutour/github-tag-action@v6.0
+        uses: smplrspace/github-tag-action-explicit@v6.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Create a GitHub release

@@ -14,7 +14,7 @@ describe('utils', () => {
     /*
      * Given
      */
-    const remoteRef = 'refs/heads/master';
+    const remoteRef = 'refs/heads/main';
 
     /*
      * When
@@ -24,7 +24,7 @@ describe('utils', () => {
     /*
      * Then
      */
-    expect(branch).toEqual('master');
+    expect(branch).toEqual('main');
   });
 
   it('test if ref is PR', () => {
