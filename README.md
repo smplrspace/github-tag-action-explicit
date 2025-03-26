@@ -8,7 +8,7 @@ A GitHub Action to automatically bump and tag master, on merge, with the latest 
 ## Usage
 
 ```yaml
-name: Bump version
+name: Bump version (original action)
 on:
   push:
     branches:
@@ -20,9 +20,69 @@ jobs:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
         id: tag_version
-        uses: smplrspace/github-tag-action-explicit@v6.1
+        uses: smplrspace/github-tag-action-explicit@v1.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create a GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
+```
+
+```yaml
+name: Bump version (explicit pre-release)
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        id: tag_version
+        uses: smplrspace/github-tag-action-explicit@v1.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          release_branches: 'ignore-all-branches'
+          pre_release_branches: '.*'
+          append_to_pre_release_tag: 'beta' # without this line, it would be `vX.Y.Z-main.N`. With this line: `vX.Y.Z-beta.N`
+          force_prerelease_bump: 'prerelease'
+      - name: Create a GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
+```
+
+```yaml
+name: Bump version (manual choice)
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        type: choice
+        description: Release bump
+        options:
+        - patch
+        - minor
+        - major
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        id: tag_version
+        uses: smplrspace/github-tag-action-explicit@v1.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          release_branches: '.*'
+          force_bump: ${{ inputs.bump }}
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1
         with:
