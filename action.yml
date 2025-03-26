@@ -1,6 +1,6 @@
-name: "GitHub Tag - Force Bump Fork"
+name: "GitHub tag explicit"
 description: "Bump and push git tag on merge"
-author: "Romain Endelin"
+author: "Smplrspace"
 outputs:
   new_tag:
     description: "Generated tag"
@@ -71,4 +71,4 @@ runs:
   main: "lib/main.js"
 branding:
   icon: "git-merge"
-  color: "purple"
+  color: "gray-dark"
