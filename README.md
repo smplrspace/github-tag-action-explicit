@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
         id: tag_version
-        uses: smplrspace/github-tag-action-explicit@v1.1
+        uses: smplrspace/github-tag-action-explicit@v1.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Create a GitHub release
@@ -44,7 +44,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
         id: tag_version
-        uses: smplrspace/github-tag-action-explicit@v1.1
+        uses: smplrspace/github-tag-action-explicit@v1.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           release_branches: 'ignore-all-branches'
@@ -78,7 +78,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
         id: tag_version
-        uses: smplrspace/github-tag-action-explicit@v1.1
+        uses: smplrspace/github-tag-action-explicit@v1.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           release_branches: '.*'
